@@ -9,8 +9,7 @@ const Footer = () => {
         <div className="footer-grid">
           <div className="footer-col">
             <Link to="/" className="logo" style={{ marginBottom: '1.5rem' }}>
-              <img src="/logo.png" alt="Kkraftstories Logo" style={{ height: '40px', width: 'auto' }} />
-              <span>Kkraftstories</span>
+              <img src="/logo.png" alt="Kkraftstories Logo" style={{ height: '80px', width: 'auto' }} />
             </Link>
             <p style={{ color: 'rgba(255,255,255,0.6)', marginBottom: '1.5rem', maxWidth: '300px' }}>
               A modern creative agency dedicated to visual storytelling and marketing excellence. We bring your vision to life.

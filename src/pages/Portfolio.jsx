@@ -63,8 +63,9 @@ const Portfolio = () => {
               <motion.div
                 key={item.id}
                 layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, scale: 0.9, y: 50 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3 }}
                 className="glass-card"

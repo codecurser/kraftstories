@@ -46,6 +46,11 @@ const Home = () => {
 
       {/* Hero Section */}
       <section style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+        {/* Hero Background Image */}
+        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }}>
+          <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url("/poster.jpg")', backgroundSize: 'cover', backgroundPosition: 'center', filter: 'blur(5px) brightness(0.6)', transform: 'scale(1.05)' }}></div>
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(5,5,5,0.7) 0%, rgba(5,5,5,1) 100%)' }}></div>
+        </div>
 
 
         <div className="container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
@@ -86,10 +91,16 @@ const Home = () => {
       {/* Services Section */}
       <section className="section">
         <div className="container">
-          <div className="section-header">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6 }}
+            className="section-header"
+          >
             <h2 className="section-title">Our <span className="text-gradient-primary">Expertise</span></h2>
             <p className="section-subtitle">Everything you need to build a powerful digital presence under one roof.</p>
-          </div>
+          </motion.div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
             {services.map((service, index) => (
@@ -119,13 +130,19 @@ const Home = () => {
       {/* Portfolio Preview */}
       <section className="section" style={{ background: 'rgba(255,255,255,0.02)' }}>
         <div className="container">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '3rem' }}>
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6 }}
+            style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '3rem' }}
+          >
             <div>
               <h2 className="section-title" style={{ marginBottom: '0.5rem' }}>Featured <span className="text-gradient-accent">Work</span></h2>
               <p className="section-subtitle" style={{ margin: 0 }}>Glimpses of our creative brilliance.</p>
             </div>
             <Link to="/portfolio" className="btn btn-outline" style={{ display: 'none', '@media(min-width: 768px)': { display: 'flex' } }}>View All Projects</Link>
-          </div>
+          </motion.div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2rem' }}>
             {[1, 2, 3].map((item) => (
@@ -156,10 +173,16 @@ const Home = () => {
       {/* Testimonials */}
       <section className="section">
         <div className="container">
-          <div className="section-header">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6 }}
+            className="section-header"
+          >
             <h2 className="section-title">Client <span className="text-gradient-primary">Love</span></h2>
             <p className="section-subtitle">Don't just take our word for it.</p>
-          </div>
+          </motion.div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
             {testimonials.map((test, index) => (
@@ -195,8 +218,19 @@ const Home = () => {
       {/* CTA Section */}
       <section className="section" style={{ paddingBottom: '2rem' }}>
         <div className="container">
-          <div className="glass-card" style={{ background: 'linear-gradient(135deg, rgba(108, 76, 241, 0.1), rgba(212, 163, 115, 0.05))', textAlign: 'center', padding: '5rem 2rem', position: 'relative', overflow: 'hidden' }}>
-            <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.03\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")', zIndex: 0 }}></div>
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9, y: 50 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="glass-card" 
+            style={{ background: 'linear-gradient(135deg, rgba(108, 76, 241, 0.1), rgba(212, 163, 115, 0.05))', textAlign: 'center', padding: '5rem 2rem', position: 'relative', overflow: 'hidden' }}
+          >
+            <motion.div 
+              animate={{ backgroundPosition: ['0% 0%', '100% 100%'] }}
+              transition={{ duration: 20, repeat: Infinity, repeatType: 'reverse' }}
+              style={{ position: 'absolute', top: 0, left: 0, width: '200%', height: '200%', background: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.03\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")', zIndex: 0 }}
+            ></motion.div>
             
             <div style={{ position: 'relative', zIndex: 1 }}>
               <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Ready to Elevate Your Brand?</h2>
@@ -210,7 +244,7 @@ const Home = () => {
                 </a>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 

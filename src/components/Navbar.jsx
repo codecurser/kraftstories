@@ -21,8 +21,7 @@ const Navbar = () => {
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="container nav-container">
         <Link to="/" className="logo" onClick={closeMenu}>
-          <img src="/logo.png" alt="Kkraftstories Logo" style={{ height: '40px', width: 'auto' }} />
-          <span>Kkraftstories</span>
+          <img src="/logo.png" alt="Kkraftstories Logo" style={{ height: '65px', width: 'auto', transition: 'height 0.3s ease' }} />
         </Link>
 
         <div className="nav-links">
