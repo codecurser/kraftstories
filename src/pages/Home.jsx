@@ -46,28 +46,60 @@ const Home = () => {
 
       {/* Hero Section */}
       <section style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-        {/* Hero Background Image */}
-        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }}>
-          <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url("/poster.jpg")', backgroundSize: 'cover', backgroundPosition: 'center', filter: 'blur(5px) brightness(0.6)', transform: 'scale(1.05)' }}></div>
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(5,5,5,0.7) 0%, rgba(5,5,5,1) 100%)' }}></div>
-        </div>
+        {/* Hero Background Image with Parallax */}
+        <motion.div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '120%', y: heroY, zIndex: 0 }}>
+          <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url("/poster.jpg")', backgroundSize: 'cover', backgroundPosition: 'center', filter: 'brightness(0.4)' }}></div>
+          {/* Radial dark overlay to focus on center */}
+          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at center, transparent 0%, rgba(5,5,5,0.7) 100%)' }}></div>
+          {/* Bottom gradient to blend smoothly into the next section */}
+          <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '40%', background: 'linear-gradient(to bottom, transparent 0%, rgba(5,5,5,1) 100%)' }}></div>
+        </motion.div>
 
-
-        <div className="container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
+        <div className="container" style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
-            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', position: 'relative' }}
           >
-            <h1 style={{ fontSize: '4.5rem', marginBottom: '1.5rem', lineHeight: '1.1', fontWeight: '800' }}>
+            {/* Floating Element Left */}
+            <motion.div
+              animate={{ y: [-15, 15, -15], rotate: [-2, 2, -2] }}
+              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+              className="glass"
+              style={{ position: 'absolute', top: '-10%', left: '-20%', padding: '1rem', display: 'flex', alignItems: 'center', gap: '0.8rem', opacity: 0.9 }}
+            >
+              <Camera size={24} color="var(--color-primary)" />
+              <div style={{ textAlign: 'left' }}>
+                <p style={{ fontSize: '0.8rem', margin: 0, color: 'rgba(255,255,255,0.6)' }}>Quality</p>
+                <p style={{ fontSize: '1rem', margin: 0, fontWeight: 'bold' }}>4K Cinematic</p>
+              </div>
+            </motion.div>
+
+            {/* Floating Element Right */}
+            <motion.div
+              animate={{ y: [15, -15, 15], rotate: [2, -2, 2] }}
+              transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+              className="glass"
+              style={{ position: 'absolute', bottom: '15%', right: '-25%', padding: '1rem', display: 'flex', alignItems: 'center', gap: '0.8rem', opacity: 0.9 }}
+            >
+              <div style={{ background: 'var(--color-accent)', borderRadius: '50%', padding: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <MonitorPlay size={20} color="#000" />
+              </div>
+              <div style={{ textAlign: 'left' }}>
+                <p style={{ fontSize: '1rem', margin: 0, fontWeight: 'bold', color: 'var(--color-accent)' }}>+200%</p>
+                <p style={{ fontSize: '0.8rem', margin: 0, color: 'rgba(255,255,255,0.6)' }}>Engagement</p>
+              </div>
+            </motion.div>
+
+            <h1 style={{ fontSize: 'clamp(3rem, 8vw, 5.5rem)', marginBottom: '1.5rem', lineHeight: '1.1', fontWeight: '800', textShadow: '0 10px 30px rgba(0,0,0,0.8)' }}>
               We Create <br />
-              <span className="text-gradient-primary">
+              <span className="text-gradient-primary" style={{ textShadow: 'none' }}>
                 <TypewriterText text="Visual Stories" />
               </span>
               <br /> That Convert.
             </h1>
-            <p style={{ fontSize: '1.25rem', color: 'rgba(255,255,255,0.8)', marginBottom: '3rem', maxWidth: '600px' }}>
+            <p style={{ fontSize: 'clamp(1rem, 3vw, 1.25rem)', color: 'rgba(255,255,255,0.9)', marginBottom: '3rem', maxWidth: '600px', textShadow: '0 4px 10px rgba(0,0,0,0.8)' }}>
               A premium creative agency specializing in cinematic videography, high-end photography, and digital marketing for brands that want to dominate.
             </p>
             <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
