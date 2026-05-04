@@ -457,6 +457,13 @@ ul {
   transform-origin: left center;
 }
 
+.splash-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+}
+
 @media (max-width: 768px) {
   .header-logo img {
     height: 45px;
@@ -468,6 +475,9 @@ ul {
   }
   .hide-on-mobile {
     display: none !important;
+  }
+  .splash-video {
+    object-fit: contain;
   }
 }
 

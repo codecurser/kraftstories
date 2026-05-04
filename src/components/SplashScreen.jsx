@@ -45,7 +45,7 @@ const SplashScreen = ({ onFinish }) => {
         playsInline
         preload="auto"
         onEnded={() => onFinish()}
-        style={{ width: '100%', height: '100%', objectFit: 'cover', willChange: 'transform' }}
+        className="splash-video"
       ></video>
       
       <button 
