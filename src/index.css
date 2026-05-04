@@ -441,6 +441,36 @@ ul {
   font-size: 0.9rem;
 }
 
+/* Logo Responsive Styles */
+.header-logo img {
+  height: 65px;
+  width: auto;
+  transform: scale(3);
+  transform-origin: left center;
+  transition: all 0.3s ease;
+}
+
+.footer-logo img {
+  height: 80px;
+  width: auto;
+  transform: scale(3);
+  transform-origin: left center;
+}
+
+@media (max-width: 768px) {
+  .header-logo img {
+    height: 45px;
+    transform: scale(2.5);
+  }
+  .footer-logo img {
+    height: 55px;
+    transform: scale(2.5);
+  }
+  .hide-on-mobile {
+    display: none !important;
+  }
+}
+
 /* Responsive */
 @media (max-width: 992px) {
   .footer-grid {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Camera, MonitorPlay, PenTool, Search, Layout, Video, ArrowRight, Star, MessageCircle } from 'lucide-react';
 
@@ -36,21 +36,29 @@ const TypewriterText = ({ text }) => {
 
 const Home = () => {
   const { scrollY } = useScroll();
-  const heroY = useTransform(scrollY, [0, 500], [0, 150]);
-  const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
-  const serviceY = useTransform(scrollY, [0, 800], [0, -50]);
+  const smoothScrollY = useSpring(scrollY, { stiffness: 100, damping: 30, restDelta: 0.001 });
+  
+  // Direct scroll for background to prevent laggy feel
+  const heroBgY = useTransform(scrollY, [0, 1000], [0, 400]);
+  const heroOpacity = useTransform(scrollY, [0, 400], [1, 0]);
+  
+  // Spring scroll for floating text and elements
+  const heroTextY = useTransform(smoothScrollY, [0, 800], [0, 250]);
+  
+  const servicesParallax = useTransform(smoothScrollY, [200, 1000], [50, -50]);
+  const portfolioParallax = useTransform(smoothScrollY, [600, 1500], [80, -80]);
+  const imgParallax = useTransform(smoothScrollY, [800, 2000], ["-15%", "15%"]);
+  const testimonialParallax = useTransform(smoothScrollY, [1200, 2200], [50, -50]);
   
   return (
     <>
-      {/* Background glow effects - Removed in favor of global AnimatedBackground */}
-
       {/* Hero Section */}
       <section style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-        {/* Hero Background Image with Parallax */}
-        <motion.div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '120%', y: heroY, zIndex: 0 }}>
-          <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url("/poster.jpg")', backgroundSize: 'cover', backgroundPosition: 'center', filter: 'brightness(0.4)' }}></div>
+        {/* Hero Background Image with Smooth Parallax */}
+        <motion.div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '120%', y: heroBgY, zIndex: 0 }}>
+          <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url("/poster.jpg")', backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.5, mixBlendMode: 'luminosity' }}></div>
           {/* Radial dark overlay to focus on center */}
-          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at center, transparent 0%, rgba(5,5,5,0.7) 100%)' }}></div>
+          <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at center, transparent 0%, rgba(5,5,5,0.8) 100%)' }}></div>
           {/* Bottom gradient to blend smoothly into the next section */}
           <div style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '40%', background: 'linear-gradient(to bottom, transparent 0%, rgba(5,5,5,1) 100%)' }}></div>
         </motion.div>
@@ -60,37 +68,8 @@ const Home = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
-            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', position: 'relative' }}
+            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', position: 'relative', y: heroTextY, opacity: heroOpacity }}
           >
-            {/* Floating Element Left */}
-            <motion.div
-              animate={{ y: [-15, 15, -15], rotate: [-2, 2, -2] }}
-              transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-              className="glass"
-              style={{ position: 'absolute', top: '-10%', left: '-20%', padding: '1rem', display: 'flex', alignItems: 'center', gap: '0.8rem', opacity: 0.9 }}
-            >
-              <Camera size={24} color="var(--color-primary)" />
-              <div style={{ textAlign: 'left' }}>
-                <p style={{ fontSize: '0.8rem', margin: 0, color: 'rgba(255,255,255,0.6)' }}>Quality</p>
-                <p style={{ fontSize: '1rem', margin: 0, fontWeight: 'bold' }}>4K Cinematic</p>
-              </div>
-            </motion.div>
-
-            {/* Floating Element Right */}
-            <motion.div
-              animate={{ y: [15, -15, 15], rotate: [2, -2, 2] }}
-              transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-              className="glass"
-              style={{ position: 'absolute', bottom: '15%', right: '-25%', padding: '1rem', display: 'flex', alignItems: 'center', gap: '0.8rem', opacity: 0.9 }}
-            >
-              <div style={{ background: 'var(--color-accent)', borderRadius: '50%', padding: '0.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <MonitorPlay size={20} color="#000" />
-              </div>
-              <div style={{ textAlign: 'left' }}>
-                <p style={{ fontSize: '1rem', margin: 0, fontWeight: 'bold', color: 'var(--color-accent)' }}>+200%</p>
-                <p style={{ fontSize: '0.8rem', margin: 0, color: 'rgba(255,255,255,0.6)' }}>Engagement</p>
-              </div>
-            </motion.div>
 
             <h1 style={{ fontSize: 'clamp(3rem, 8vw, 5.5rem)', marginBottom: '1.5rem', lineHeight: '1.1', fontWeight: '800', textShadow: '0 10px 30px rgba(0,0,0,0.8)' }}>
               We Create <br />
@@ -134,7 +113,7 @@ const Home = () => {
             <p className="section-subtitle">Everything you need to build a powerful digital presence under one roof.</p>
           </motion.div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+          <motion.div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', y: servicesParallax }}>
             {services.map((service, index) => (
               <motion.div 
                 key={service.id}
@@ -155,7 +134,7 @@ const Home = () => {
                 </Link>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -176,7 +155,7 @@ const Home = () => {
             <Link to="/portfolio" className="btn btn-outline" style={{ display: 'none', '@media(min-width: 768px)': { display: 'flex' } }}>View All Projects</Link>
           </motion.div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2rem' }}>
+          <motion.div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2rem', y: portfolioParallax }}>
             {[1, 2, 3].map((item) => (
               <motion.div 
                 key={item}
@@ -187,15 +166,17 @@ const Home = () => {
                 transition={{ duration: 0.4 }}
                 style={{ borderRadius: '16px', overflow: 'hidden', position: 'relative', height: '300px', background: '#111' }}
               >
-                <img src="/poster.jpg" alt="Project" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%)' }}></div>
+                <motion.div style={{ width: '100%', height: '130%', y: imgParallax, position: 'absolute', top: '-15%', left: 0 }}>
+                  <img src="/poster.jpg" alt="Project" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                </motion.div>
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%)' }}></div>
                 <div style={{ position: 'absolute', bottom: '1.5rem', left: '1.5rem', right: '1.5rem' }}>
                   <span style={{ background: 'var(--color-primary)', color: '#fff', fontSize: '0.8rem', padding: '0.3rem 0.8rem', borderRadius: '50px', marginBottom: '1rem', display: 'inline-block' }}>Campaign</span>
                   <h3 style={{ fontSize: '1.5rem' }}>Brand Evolution Project {item}</h3>
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
           <div style={{ textAlign: 'center', marginTop: '3rem' }}>
             <Link to="/portfolio" className="btn btn-outline" style={{ width: '100%', maxWidth: '300px' }}>View All Projects</Link>
           </div>
@@ -216,7 +197,7 @@ const Home = () => {
             <p className="section-subtitle">Don't just take our word for it.</p>
           </motion.div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+          <motion.div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', y: testimonialParallax }}>
             {testimonials.map((test, index) => (
               <motion.div 
                 key={test.id}
@@ -243,7 +224,7 @@ const Home = () => {
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 

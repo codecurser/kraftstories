@@ -73,41 +73,62 @@ const Services = () => {
           </motion.p>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '4rem', marginBottom: '6rem' }}>
-          {servicesList.map((service, index) => (
-            <motion.div
-              key={service.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="glass-card"
-              style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '2rem', '@media(min-width: 768px)': { gridTemplateColumns: '1fr 2fr' } }}
-            >
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                <div style={{ background: 'linear-gradient(135deg, rgba(108,76,241,0.2), rgba(212,163,115,0.1))', padding: '1.5rem', borderRadius: '16px', marginBottom: '1.5rem', color: 'var(--color-primary)' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '5rem', marginBottom: '6rem', position: 'relative' }}>
+          {servicesList.map((service, index) => {
+            const isEven = index % 2 === 0;
+            return (
+              <motion.div
+                key={service.id}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                whileHover={{ y: -5, boxShadow: '0 30px 60px rgba(0,0,0,0.6)' }}
+                transition={{ duration: 0.6, type: 'spring', stiffness: 100 }}
+                className="glass-card"
+                style={{ 
+                  display: 'grid', 
+                  gridTemplateColumns: '1fr', 
+                  gap: '3rem', 
+                  position: 'relative',
+                  overflow: 'hidden',
+                  padding: '3rem',
+                  border: '1px solid rgba(255,255,255,0.05)',
+                  '@media(min-width: 992px)': { gridTemplateColumns: '1fr 2fr' } 
+                }}
+              >
+                {/* Massive faded watermark icon for deep visual texture */}
+                <div style={{ position: 'absolute', right: '-10%', top: '-10%', opacity: 0.03, transform: 'scale(5)', pointerEvents: 'none', zIndex: 0 }}>
                   {service.icon}
                 </div>
-                <h2 style={{ fontSize: '1.8rem', marginBottom: '1rem' }}>{service.title}</h2>
-                <Link to="/contact" className="btn btn-outline" style={{ marginTop: 'auto' }}>Request Quote</Link>
-              </div>
-              
-              <div>
-                <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.8)', marginBottom: '2rem', lineHeight: '1.8' }}>
-                  {service.description}
-                </p>
-                <h4 style={{ fontSize: '1.1rem', marginBottom: '1rem', color: 'var(--color-accent)' }}>What's Included:</h4>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                  {service.features.map((feature, i) => (
-                    <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
-                      <CheckCircle2 size={20} color="var(--color-primary)" style={{ flexShrink: 0, marginTop: '2px' }} />
-                      <span style={{ color: 'rgba(255,255,255,0.7)' }}>{feature}</span>
-                    </div>
-                  ))}
+
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', position: 'relative', zIndex: 1 }}>
+                  <div style={{ background: 'linear-gradient(135deg, rgba(108,76,241,0.2), rgba(212,163,115,0.1))', padding: '1.5rem', borderRadius: '20px', marginBottom: '2rem', color: 'var(--color-primary)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                    {service.icon}
+                  </div>
+                  <h2 style={{ fontSize: '2.2rem', marginBottom: '1rem', fontWeight: '800', letterSpacing: '-0.5px' }}>{service.title}</h2>
+                  <Link to="/contact" className="btn btn-outline" style={{ marginTop: 'auto', alignSelf: 'flex-start' }}>Request Quote</Link>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+                
+                <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                  <p style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.9)', marginBottom: '2.5rem', lineHeight: '1.8', fontWeight: '300' }}>
+                    {service.description}
+                  </p>
+                  
+                  <div style={{ background: 'rgba(0,0,0,0.3)', padding: '2rem', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.02)' }}>
+                    <h4 style={{ fontSize: '1.1rem', marginBottom: '1.5rem', color: 'var(--color-accent)', textTransform: 'uppercase', letterSpacing: '1px' }}>What's Included</h4>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
+                      {service.features.map((feature, i) => (
+                        <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+                          <CheckCircle2 size={18} color="var(--color-primary)" style={{ flexShrink: 0 }} />
+                          <span style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.95rem' }}>{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </div>
