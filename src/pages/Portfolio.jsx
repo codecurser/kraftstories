@@ -2,15 +2,12 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Play } from 'lucide-react';
 
-const categories = ['All', 'Reels', 'Photography', 'Brand Films', 'Design'];
+const categories = ['All', 'Web Development', 'Videography'];
 
-const portfolioItems = [
-  { id: 1, title: 'Summer Collection', category: 'Photography', type: 'image' },
-  { id: 2, title: 'Fitness App Promo', category: 'Reels', type: 'video' },
-  { id: 3, title: 'Tech Startup Identity', category: 'Design', type: 'image' },
-  { id: 4, title: 'Restaurant Launch', category: 'Brand Films', type: 'video' },
-  { id: 5, title: 'Travel Vlog Edit', category: 'Reels', type: 'video' },
-  { id: 6, title: 'Corporate Event', category: 'Photography', type: 'image' },
+export const portfolioItems = [
+  { id: 7, title: 'ataryo.com', category: 'Web Development', type: 'iframe', url: 'https://www.ataryo.com/' },
+  { id: 8, title: 'drmohitmathur.com', category: 'Web Development', type: 'iframe', url: 'https://drmohitmathur.com' },
+  { id: 9, title: 'Featured Video Project', category: 'Videography', type: 'video', url: 'https://drive.google.com/file/d/1hryu2U6NUGxmbt4w1ugCKPSneJrQRzbV/view?usp=drivesdk', poster: '/videography-poster.png' },
 ];
 
 const Portfolio = () => {
@@ -69,9 +66,33 @@ const Portfolio = () => {
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3 }}
                 className="glass-card"
+                onClick={() => {
+                  if ((item.type === 'iframe' || item.type === 'video') && item.url) {
+                    window.open(item.url, '_blank');
+                  }
+                }}
                 style={{ padding: 0, overflow: 'hidden', height: '350px', position: 'relative', cursor: 'pointer' }}
               >
-                <div style={{ width: '100%', height: '100%', backgroundImage: 'url("/poster.jpg")', backgroundSize: 'cover', backgroundPosition: 'center', position: 'relative' }}>
+                <div style={{ width: '100%', height: '100%', backgroundImage: item.type === 'iframe' ? 'none' : `url("${item.poster || '/poster.jpg'}")`, backgroundSize: 'cover', backgroundPosition: 'center', position: 'relative' }}>
+                  {item.type === 'iframe' && (
+                    <iframe 
+                      src={item.url} 
+                      title={item.title}
+                      style={{ 
+                        width: '400%', 
+                        height: '400%', 
+                        border: 'none', 
+                        position: 'absolute', 
+                        top: 0, 
+                        left: 0, 
+                        transform: 'scale(0.25)', 
+                        transformOrigin: 'top left',
+                        zIndex: 0, 
+                        pointerEvents: 'none',
+                        background: '#fff'
+                      }}
+                    />
+                  )}
                   {item.type === 'video' && (
                     <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '60px', height: '60px', borderRadius: '50%', background: 'rgba(255,255,255,0.2)', backdropFilter: 'blur(5px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2 }}>
                       <Play fill="#fff" size={24} style={{ marginLeft: '4px' }} />

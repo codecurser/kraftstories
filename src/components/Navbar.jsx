@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import { Menu, X, Video } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,7 +26,10 @@ const Navbar = () => {
           <img 
             src={scrolled ? "/logo-scrolled.png" : "/logo.png"} 
             alt="Kkraftstories Logo" 
-            style={scrolled ? { transform: 'scale(3)', height: '55px' } : {}}
+            style={{
+              ...(scrolled ? { transform: 'scale(3)', height: '55px' } : {}),
+              filter: !isHomePage ? 'brightness(0) invert(1)' : 'none'
+            }}
           />
         </Link>
 

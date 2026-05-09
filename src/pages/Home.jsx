@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Camera, MonitorPlay, PenTool, Search, Layout, Video, ArrowRight, Star, MessageCircle } from 'lucide-react';
+import { Camera, MonitorPlay, PenTool, Search, Layout, Video, ArrowRight, Star, MessageCircle, Play } from 'lucide-react';
+import { portfolioItems } from './Portfolio';
 
 const services = [
   { id: 1, title: 'Social Media Management', icon: <MonitorPlay size={32} />, desc: 'Grow your brand presence with strategic content.' },
@@ -13,9 +14,9 @@ const services = [
 ];
 
 const testimonials = [
-  { id: 1, name: 'Sarah Jenkins', role: 'Startup Founder', text: 'Kkraftstories completely transformed our online presence. The video quality is unmatched!' },
-  { id: 2, name: 'David Miller', role: 'Event Organizer', text: 'Professional, creative, and highly dedicated. They delivered our promotional material way before the deadline.' },
-  { id: 3, name: 'Elena Rodriguez', role: 'Influencer', text: 'My engagement doubled after they took over my social media and started producing my reels.' },
+  { id: 1, name: 'Keshavam', role: 'Founder, Ataryo', text: 'Working with Kkraftstories was an absolute game-changer for Ataryo. They perfectly understood our vision and built a platform that truly speaks to our audience. Highly recommended!' },
+  { id: 2, name: 'Dr. Mohit Mathur', role: 'Professional Doctor', text: 'As a medical professional, maintaining trust online is crucial. They delivered a clean, fast, and professional website that has significantly improved how patients interact with my practice.' },
+  { id: 3, name: 'Elena Rodriguez', role: 'Creative Director', text: 'The cinematic quality of the promotional video they produced for us was simply outstanding. Their attention to detail, lighting, and creative direction is unmatched.' },
 ];
 
 const TypewriterText = ({ text }) => {
@@ -156,23 +157,52 @@ const Home = () => {
           </motion.div>
 
           <motion.div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2rem', y: portfolioParallax }}>
-            {[1, 2, 3].map((item) => (
+            {portfolioItems.slice(-3).reverse().map((item) => (
               <motion.div 
-                key={item}
+                key={item.id}
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 whileHover={{ y: -10 }}
                 transition={{ duration: 0.4 }}
-                style={{ borderRadius: '16px', overflow: 'hidden', position: 'relative', height: '300px', background: '#111' }}
+                onClick={() => {
+                  if ((item.type === 'iframe' || item.type === 'video') && item.url) {
+                    window.open(item.url, '_blank');
+                  }
+                }}
+                style={{ borderRadius: '16px', overflow: 'hidden', position: 'relative', height: '300px', background: '#111', cursor: 'pointer' }}
               >
                 <motion.div style={{ width: '100%', height: '130%', y: imgParallax, position: 'absolute', top: '-15%', left: 0 }}>
-                  <img src="/poster.jpg" alt="Project" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  {item.type === 'iframe' ? (
+                    <iframe 
+                      src={item.url} 
+                      title={item.title}
+                      style={{ 
+                        width: '400%', 
+                        height: '400%', 
+                        border: 'none', 
+                        position: 'absolute', 
+                        top: 0, 
+                        left: 0, 
+                        transform: 'scale(0.25)', 
+                        transformOrigin: 'top left',
+                        pointerEvents: 'none',
+                        background: '#fff'
+                      }}
+                    />
+                  ) : (
+                    <img src={item.poster || "/poster.jpg"} alt={item.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  )}
                 </motion.div>
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%)' }}></div>
-                <div style={{ position: 'absolute', bottom: '1.5rem', left: '1.5rem', right: '1.5rem' }}>
-                  <span style={{ background: 'var(--color-primary)', color: '#fff', fontSize: '0.8rem', padding: '0.3rem 0.8rem', borderRadius: '50px', marginBottom: '1rem', display: 'inline-block' }}>Campaign</span>
-                  <h3 style={{ fontSize: '1.5rem' }}>Brand Evolution Project {item}</h3>
+                {item.type === 'video' && (
+                  <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '50px', height: '50px', borderRadius: '50%', background: 'rgba(255,255,255,0.2)', backdropFilter: 'blur(5px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2 }}>
+                    <Play fill="#fff" size={20} style={{ marginLeft: '3px' }} />
+                  </div>
+                )}
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%)', zIndex: 1 }}></div>
+                <div style={{ position: 'absolute', bottom: '1.5rem', left: '1.5rem', right: '1.5rem', zIndex: 3 }}>
+                  <span style={{ background: 'var(--color-primary)', color: '#fff', fontSize: '0.8rem', padding: '0.3rem 0.8rem', borderRadius: '50px', marginBottom: '1rem', display: 'inline-block' }}>{item.category}</span>
+                  <h3 style={{ fontSize: '1.5rem' }}>{item.title}</h3>
                 </div>
               </motion.div>
             ))}

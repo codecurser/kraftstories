@@ -111,6 +111,7 @@ ul {
   transition: var(--transition);
   border: none;
   text-transform: capitalize;
+  color: var(--color-text);
 }
 
 .btn-primary {
