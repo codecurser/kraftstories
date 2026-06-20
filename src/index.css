@@ -830,3 +830,54 @@ ul {
     font-size: 2.2rem;
   }
 }
+
+/* Interactive Typography Reveal Section */
+.typography-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.typography-item {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding: 2rem 0;
+  transition: all 0.4s ease;
+}
+
+.typography-item:last-child {
+  border-bottom: none;
+}
+
+.typography-item .huge-text {
+  font-family: var(--font-heading);
+  font-size: clamp(3rem, 7vw, 7rem);
+  font-weight: 800;
+  line-height: 1;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.typography-item:hover .huge-text,
+.typography-item.active .huge-text {
+  color: #FFFFFF;
+  -webkit-text-stroke: 1px #FFFFFF;
+  transform: translateX(30px);
+}
+
+.typography-item .service-desc {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.25rem;
+  margin-top: 1.5rem;
+  margin-left: 30px;
+  max-width: 500px;
+  line-height: 1.6;
+  font-weight: 300;
+}

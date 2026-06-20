@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Star, MessageCircle, Play } from 'lucide-react';
 import { portfolioItems } from './Portfolio';
@@ -35,6 +35,7 @@ const TypewriterText = ({ text }) => {
 };
 
 const Home = () => {
+  const [activeServiceId, setActiveServiceId] = useState(services[0].id);
   const { scrollY } = useScroll();
   
   // Direct scroll for instant, native feel
@@ -98,53 +99,76 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="section" style={{ background: '#FFFFFF' }}>
-        <div className="container">
+      {/* Interactive Typography Reveal - Our Expertise */}
+      <section className="section" style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', overflow: 'hidden', padding: '8rem 0', background: '#050505' }}>
+        
+        {/* Background Image Layer */}
+        <AnimatePresence>
+          {services.map((service) => (
+            activeServiceId === service.id && (
+              <motion.div
+                key={service.id}
+                initial={{ opacity: 0, scale: 1.05 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.05 }}
+                transition={{ duration: 1.2, ease: [0.33, 1, 0.68, 1] }}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  zIndex: 0
+                }}
+              >
+                <img 
+                  src={service.img} 
+                  alt={service.title} 
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,0.3) 100%)' }}></div>
+              </motion.div>
+            )
+          ))}
+        </AnimatePresence>
+
+        {/* Foreground Content */}
+        <div className="container" style={{ position: 'relative', zIndex: 1, width: '100%' }}>
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.6 }}
-            className="section-header"
+            viewport={{ once: true }}
+            style={{ marginBottom: '4rem' }}
           >
-            <h2 className="section-title">Our <span className="text-gradient-primary">Expertise</span></h2>
-            <p className="section-subtitle">Everything you need to build a powerful digital presence under one roof.</p>
+            <h2 style={{ color: 'var(--color-accent)', fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '3px', fontWeight: 'bold' }}>Our Expertise</h2>
+            <p style={{ color: 'rgba(255,255,255,0.7)', maxWidth: '400px', marginTop: '1rem', lineHeight: '1.6' }}>Hover over our services to see what we can build for you.</p>
           </motion.div>
 
-          <motion.div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '4rem', y: servicesParallax }}>
-            {services.map((service, index) => (
-              <motion.div 
+          <div className="typography-list">
+            {services.map((service) => (
+              <Link 
+                to="/services" 
                 key={service.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-50px' }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="shadow-card"
+                className={`typography-item ${activeServiceId === service.id ? 'active' : ''}`}
+                onMouseEnter={() => setActiveServiceId(service.id)}
               >
-                <div className="card-content">
-                  <div className="top">
-                    <h3 className="name">{service.title}</h3>
-                    <div className="date"><span>{service.date}</span></div>
-                  </div>
-                  <div className="bottom">
-                    <h2>{service.desc}</h2>
-                    <Link to="/services" className="bookmark">
-                      <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 24 24" className="bookmark-icn">
-                        <path d="M 6.0097656 2 C 4.9143111 2 4.0097656 2.9025988 4.0097656 3.9980469 L 4 22 L 12 19 L 20 22 L 20 20.556641 L 20 4 C 20 2.9069372 19.093063 2 18 2 L 6.0097656 2 z M 6.0097656 4 L 18 4 L 18 19.113281 L 12 16.863281 L 6.0019531 19.113281 L 6.0097656 4 z" fill="#fff"></path>
-                      </svg>
-                    </Link>
-                  </div>
-                </div>
-                <div className="card-bg">
-                  <img className="bg-img" src={service.img} alt={service.title} />
-                </div>
-                <div className="shadow">
-                  <img className="shadow-img" src={service.img} alt={service.title} />
-                </div>
-              </motion.div>
+                <h2 className="huge-text">{service.title}</h2>
+                <AnimatePresence>
+                  {activeServiceId === service.id && (
+                    <motion.div
+                      initial={{ opacity: 0, x: -20, height: 0 }}
+                      animate={{ opacity: 1, x: 0, height: 'auto' }}
+                      exit={{ opacity: 0, x: -20, height: 0 }}
+                      transition={{ duration: 0.4 }}
+                      style={{ overflow: 'hidden' }}
+                    >
+                      <p className="service-desc">{service.desc}</p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </Link>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
