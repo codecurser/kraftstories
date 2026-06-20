@@ -27,8 +27,7 @@ const Navbar = () => {
             src={scrolled ? "/logo-scrolled.png" : "/logo.png"} 
             alt="Kkraftstories Logo" 
             style={{
-              ...(scrolled ? { transform: 'scale(3)', height: '55px' } : {}),
-              filter: !isHomePage ? 'brightness(0) invert(1)' : 'none'
+              ...(scrolled ? { transform: 'scale(3)', height: '55px' } : {})
             }}
           />
         </Link>

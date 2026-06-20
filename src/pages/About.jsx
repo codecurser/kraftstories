@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const About = () => {
   return (
-    <div style={{ paddingTop: '100px', minHeight: '100vh' }}>
+    <div style={{ paddingTop: '120px', minHeight: '100vh', background: 'var(--color-bg)' }}>
       <div className="bg-glow" style={{ top: '20%', left: '-10%' }}></div>
       <div className="container">
         <div className="section-header">
@@ -24,15 +24,15 @@ const About = () => {
           </motion.p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center', marginBottom: '6rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5rem', alignItems: 'center', marginBottom: '8rem', '@media(max-width: 992px)': { gridTemplateColumns: '1fr', gap: '3rem' } }}>
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             className="glass"
-            style={{ height: '400px', borderRadius: '20px', overflow: 'hidden', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+            style={{ height: '500px', borderRadius: '30px', overflow: 'hidden', display: 'flex', justifyContent: 'center', alignItems: 'center', boxShadow: '0 20px 40px rgba(0,0,0,0.06)' }}
           >
-            <img src="/poster.jpg" alt="Kkraftstories Poster" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <img src="https://images.unsplash.com/photo-1542744094-3a31f272c490?q=80&w=2070" alt="Kkraftstories Team" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </motion.div>
           
           <motion.div
@@ -40,23 +40,13 @@ const About = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <h2 style={{ fontSize: '2rem', marginBottom: '1.5rem' }}>Our Story</h2>
-            <p style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '1rem', fontSize: '1.1rem' }}>
+            <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', fontWeight: '700', letterSpacing: '-0.03em' }}>Our Story</h2>
+            <p style={{ color: 'var(--color-text-muted)', marginBottom: '1.5rem', fontSize: '1.2rem', lineHeight: '1.8', fontWeight: '300' }}>
               Founded with a passion for visual excellence, Kkraftstories began as a small collective of creatives who believed that every brand has a unique story waiting to be told.
             </p>
-            <p style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '1.5rem', fontSize: '1.1rem' }}>
+            <p style={{ color: 'var(--color-text-muted)', marginBottom: '2.5rem', fontSize: '1.2rem', lineHeight: '1.8', fontWeight: '300' }}>
               Today, we are a full-service media agency helping influencers, startups, and personal brands build their digital presence through compelling visuals and data-driven strategies.
             </p>
-            <div style={{ display: 'flex', gap: '2rem', marginTop: '2rem' }}>
-              <div>
-                <h3 className="text-gradient-primary" style={{ fontSize: '2.5rem' }}>50+</h3>
-                <p style={{ color: 'rgba(255,255,255,0.5)' }}>Happy Clients</p>
-              </div>
-              <div>
-                <h3 className="text-gradient-accent" style={{ fontSize: '2.5rem' }}>1M+</h3>
-                <p style={{ color: 'rgba(255,255,255,0.5)' }}>Views Generated</p>
-              </div>
-            </div>
           </motion.div>
         </div>
       </div>

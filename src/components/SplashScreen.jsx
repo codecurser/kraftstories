@@ -21,6 +21,7 @@ const SplashScreen = ({ onFinish }) => {
 
   return (
     <motion.div
+      onClick={() => onFinish()}
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 1.5, ease: "easeInOut" }}
@@ -35,7 +36,8 @@ const SplashScreen = ({ onFinish }) => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        cursor: 'pointer'
       }}
     >
       <video

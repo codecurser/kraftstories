@@ -1,140 +1,37 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle2, XCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
-const plans = [
-  {
-    name: 'Starter',
-    price: '₹15,000',
-    period: '/month',
-    description: 'Perfect for small businesses looking to establish their online presence.',
-    features: [
-      { name: '12 Social Media Posts', included: true },
-      { name: '4 Basic Reels', included: true },
-      { name: 'Basic Community Management', included: true },
-      { name: 'Monthly Analytics Report', included: true },
-      { name: 'Professional Photography', included: false },
-      { name: 'Ad Campaign Management', included: false },
-    ],
-    recommended: false
-  },
-  {
-    name: 'Growth',
-    price: '₹35,000',
-    period: '/month',
-    description: 'Ideal for growing brands that need consistent, high-quality content.',
-    features: [
-      { name: '20 Social Media Posts', included: true },
-      { name: '8 Premium Reels', included: true },
-      { name: 'Full Community Management', included: true },
-      { name: 'Bi-weekly Analytics Report', included: true },
-      { name: '1 Monthly Photo/Video Shoot', included: true },
-      { name: 'Basic Ad Campaign Management', included: true },
-    ],
-    recommended: true
-  },
-  {
-    name: 'Premium',
-    price: 'Custom',
-    period: '',
-    description: 'Comprehensive solution for established brands and influencers.',
-    features: [
-      { name: 'Unlimited Content Creation', included: true },
-      { name: 'Cinematic Reels & Films', included: true },
-      { name: '24/7 Priority Support', included: true },
-      { name: 'Weekly Analytics & Strategy', included: true },
-      { name: 'Multiple Shoots per Month', included: true },
-      { name: 'Advanced Ad Campaigns', included: true },
-    ],
-    recommended: false
-  }
-];
 
 const Pricing = () => {
   return (
-    <div style={{ paddingTop: '100px', minHeight: '100vh' }}>
-      <div className="bg-glow" style={{ top: '20%', left: '50%', transform: 'translateX(-50%)', width: '800px', height: '800px' }}></div>
+    <div style={{ paddingTop: '120px', minHeight: '100vh', background: 'var(--color-bg)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div className="bg-glow" style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '800px', height: '800px', background: 'radial-gradient(circle, rgba(37, 99, 235, 0.05) 0%, transparent 70%)' }}></div>
       
-      <div className="container">
-        <div className="section-header">
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="section-title"
+      <div className="container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="glass-card"
+          style={{ padding: '6rem 4rem', maxWidth: '800px', margin: '0 auto', background: '#FFFFFF', borderRadius: '24px' }}
+        >
+          <motion.div 
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            style={{ display: 'inline-block', padding: '0.5rem 1.5rem', background: 'rgba(37, 99, 235, 0.1)', color: 'var(--color-accent)', borderRadius: '50px', fontWeight: '600', marginBottom: '2rem', letterSpacing: '1px' }}
           >
-            Simple, Transparent <span className="text-gradient-primary">Pricing</span>
-          </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="section-subtitle"
-          >
-            Choose the perfect package that aligns with your brand's growth objectives. No hidden fees.
-          </motion.p>
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', marginBottom: '6rem' }}>
-          {plans.map((plan, index) => (
-            <motion.div
-              key={plan.name}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 + index * 0.1 }}
-              className="glass-card"
-              style={{ 
-                position: 'relative', 
-                border: plan.recommended ? '2px solid var(--color-primary)' : '1px solid var(--color-border)',
-                transform: plan.recommended ? 'scale(1.05)' : 'scale(1)',
-                zIndex: plan.recommended ? 2 : 1,
-                display: 'flex',
-                flexDirection: 'column'
-              }}
-            >
-              {plan.recommended && (
-                <div style={{ position: 'absolute', top: '-15px', left: '50%', transform: 'translateX(-50%)', background: 'var(--color-primary)', color: '#fff', padding: '0.3rem 1rem', borderRadius: '50px', fontSize: '0.85rem', fontWeight: 'bold', letterSpacing: '1px' }}>
-                  MOST POPULAR
-                </div>
-              )}
-              
-              <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>{plan.name}</h3>
-              <p style={{ color: 'rgba(255,255,255,0.6)', marginBottom: '2rem', minHeight: '48px' }}>{plan.description}</p>
-              
-              <div style={{ marginBottom: '2rem' }}>
-                <span style={{ fontSize: '2.5rem', fontWeight: 'bold', fontFamily: 'var(--font-heading)' }}>{plan.price}</span>
-                <span style={{ color: 'rgba(255,255,255,0.5)' }}>{plan.period}</span>
-              </div>
-              
-              <div style={{ flexGrow: 1, marginBottom: '2rem' }}>
-                <ul style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                  {plan.features.map((feature, i) => (
-                    <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: feature.included ? '#fff' : 'rgba(255,255,255,0.3)' }}>
-                      {feature.included ? (
-                        <CheckCircle2 size={18} color="var(--color-primary)" />
-                      ) : (
-                        <XCircle size={18} color="rgba(255,255,255,0.2)" />
-                      )}
-                      <span style={{ fontSize: '0.95rem' }}>{feature.name}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              
-              <Link to="/contact" className={`btn ${plan.recommended ? 'btn-primary' : 'btn-outline'}`} style={{ width: '100%', justifyContent: 'center' }}>
-                Choose {plan.name}
-              </Link>
-            </motion.div>
-          ))}
-        </div>
-        
-        <div className="glass" style={{ padding: '3rem', textAlign: 'center', marginBottom: '6rem' }}>
-          <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Need a custom solution?</h2>
-          <p style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '2rem', maxWidth: '600px', margin: '0 auto 2rem' }}>
-            We understand that every brand is unique. Let's discuss your specific requirements and create a tailored package just for you.
+            UPDATE
+          </motion.div>
+          <h1 style={{ fontSize: '4rem', marginBottom: '1.5rem', letterSpacing: '-0.04em', fontFamily: 'var(--font-heading)', fontWeight: '800' }}>
+            Pricing <span className="text-gradient-primary">Coming Soon</span>
+          </h1>
+          <p style={{ color: 'var(--color-text-muted)', marginBottom: '3rem', fontSize: '1.25rem', lineHeight: '1.6', fontWeight: '300', maxWidth: '600px', margin: '0 auto 3rem' }}>
+            We're currently restructuring our service packages to bring you even more value. In the meantime, every brand is unique—let's discuss your specific needs.
           </p>
-          <Link to="/contact" className="btn btn-primary">Book a Discovery Call</Link>
-        </div>
+          <Link to="/contact" className="btn btn-primary" style={{ padding: '1.2rem 3rem', fontSize: '1.1rem' }}>
+            Contact Us for a Custom Quote
+          </Link>
+        </motion.div>
       </div>
     </div>
   );
