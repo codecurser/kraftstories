@@ -224,7 +224,7 @@ const Home = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="section" style={{ background: '#FFFFFF' }}>
+      <section className="section" style={{ background: 'var(--color-accent)', padding: '6rem 0' }}>
         <div className="container">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
@@ -233,8 +233,8 @@ const Home = () => {
             transition={{ duration: 0.6 }}
             className="section-header"
           >
-            <h2 className="section-title">Client <span className="text-gradient-primary">Love</span></h2>
-            <p className="section-subtitle">Don't just take our word for it.</p>
+            <h2 className="section-title" style={{ color: '#FFFFFF' }}>Client Love</h2>
+            <p className="section-subtitle" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>Don't just take our word for it.</p>
           </motion.div>
 
           <motion.div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', y: testimonialParallax }}>
@@ -246,7 +246,7 @@ const Home = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 className="glass-card"
-                style={{ background: '#FAFAFA' }}
+                style={{ background: '#FFFFFF', boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}
               >
                 <div style={{ display: 'flex', gap: '0.2rem', color: 'var(--color-accent)', marginBottom: '1.5rem' }}>
                   <Star fill="var(--color-accent)" size={18} />
@@ -259,7 +259,7 @@ const Home = () => {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                   <div style={{ width: '50px', height: '50px', borderRadius: '50%', background: '#E5E7EB' }}></div>
                   <div>
-                    <h4 style={{ fontSize: '1rem', fontWeight: '600' }}>{test.name}</h4>
+                    <h4 style={{ fontSize: '1rem', fontWeight: '600', color: 'var(--color-text)' }}>{test.name}</h4>
                     <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)' }}>{test.role}</p>
                   </div>
                 </div>
