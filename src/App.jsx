@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from './components/Navbar';
@@ -11,9 +11,6 @@ import Pricing from './pages/Pricing';
 import Contact from './pages/Contact';
 import ScrollToTop from './components/ScrollToTop';
 import AnimatedBackground from './components/AnimatedBackground';
-import CustomCursor from './components/CustomCursor';
-import SplashScreen from './components/SplashScreen';
-
 const PageTransition = ({ children }) => (
   <motion.div
     initial={{ opacity: 0, y: 15 }}
@@ -26,21 +23,14 @@ const PageTransition = ({ children }) => (
 );
 
 function App() {
-  const [introFinished, setIntroFinished] = useState(false);
   const location = useLocation();
 
   return (
     <div className="app-container">
-      <AnimatePresence mode="wait">
-        {!introFinished && <SplashScreen onFinish={() => setIntroFinished(true)} key="splash" />}
-      </AnimatePresence>
-      
-      <CustomCursor />
-      {introFinished && <AnimatedBackground />}
-      
+      <AnimatedBackground />
       <ScrollToTop />
       <Navbar />
-      <main style={{ visibility: introFinished ? 'visible' : 'hidden', height: introFinished ? 'auto' : '100vh', overflow: introFinished ? 'visible' : 'hidden' }}>
+      <main>
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<PageTransition><Home /></PageTransition>} />
@@ -52,7 +42,7 @@ function App() {
           </Routes>
         </AnimatePresence>
       </main>
-      {introFinished && <Footer />}
+      <Footer />
     </div>
   );
 }

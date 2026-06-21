@@ -18,29 +18,10 @@ const testimonials = [
   { id: 2, name: 'Dr. Mohit Mathur', role: 'Professional Doctor', text: 'As a medical professional, maintaining trust online is crucial. They delivered a clean, fast, and professional website that has significantly improved how patients interact with my practice.' }
 ];
 
-const TypewriterText = ({ text }) => {
-  const [displayText, setDisplayText] = useState('');
-  
-  useEffect(() => {
-    let i = 0;
-    const interval = setInterval(() => {
-      setDisplayText(text.substring(0, i));
-      i++;
-      if (i > text.length) clearInterval(interval);
-    }, 100);
-    return () => clearInterval(interval);
-  }, [text]);
-
-  return <span>{displayText}<span className="cursor" style={{ animation: 'blink 1s infinite' }}>|</span></span>;
-};
 
 const Home = () => {
   const [activeServiceId, setActiveServiceId] = useState(services[0].id);
   const { scrollY } = useScroll();
-  
-  // Direct scroll for instant, native feel
-  const heroTextY = useTransform(scrollY, [0, 800], [0, 250]);
-  const heroOpacity = useTransform(scrollY, [0, 400], [1, 0]);
   
   const servicesParallax = useTransform(scrollY, [200, 1000], [50, -50]);
   const portfolioParallax = useTransform(scrollY, [600, 1500], [80, -80]);
@@ -53,11 +34,8 @@ const Home = () => {
       <section style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', paddingTop: '80px' }}>
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center', '@media(max-width: 992px)': { gridTemplateColumns: '1fr' } }}>
-            <motion.div 
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, delay: 0.2 }}
-              style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textAlign: 'left', position: 'relative', y: heroTextY, opacity: heroOpacity }}
+            <div 
+              style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textAlign: 'left', position: 'relative' }}
             >
               <div style={{ padding: '0.5rem 1rem', background: 'rgba(255,255,255,0.8)', border: '1px solid var(--color-border)', borderRadius: '50px', marginBottom: '2rem', fontSize: '0.9rem', color: 'var(--color-text-muted)', boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
                 ✨ Redefining Digital Aesthetics
@@ -65,7 +43,7 @@ const Home = () => {
               <h1 style={{ fontSize: 'clamp(3.5rem, 6vw, 5.5rem)', marginBottom: '1.5rem', lineHeight: '1.1', fontWeight: '800', letterSpacing: '-0.04em', color: 'var(--color-text)' }}>
                 We Create <br />
                 <span className="text-gradient-primary">
-                  <TypewriterText text="Visual Stories" />
+                  Visual Stories
                 </span>
                 <br /> That Convert.
               </h1>
@@ -76,12 +54,9 @@ const Home = () => {
                 <Link to="/contact" className="btn btn-primary" style={{ padding: '1.2rem 3rem', fontSize: '1.1rem' }}>Start a Project</Link>
                 <Link to="/portfolio" className="btn btn-outline" style={{ padding: '1.2rem 3rem', fontSize: '1.1rem' }}>View Showreel</Link>
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, x: 50 }}
-              animate={{ opacity: 1, scale: 1, x: 0 }}
-              transition={{ duration: 1, delay: 0.4 }}
+            <div
               style={{ position: 'relative', height: '600px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
               className="hide-on-mobile"
             >
@@ -94,7 +69,7 @@ const Home = () => {
                   <img src="https://images.unsplash.com/photo-1542744094-3a31f272c490?q=80&w=2070" alt="Creative Strategy" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} />
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -326,12 +301,7 @@ const Home = () => {
         </div>
       </section>
 
-      <style>{`
-        @keyframes blink {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0; }
-        }
-      `}</style>
+
     </>
   );
 };
