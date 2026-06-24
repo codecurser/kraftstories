@@ -24,7 +24,7 @@ const About = () => {
           </motion.p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5rem', alignItems: 'center', marginBottom: '8rem', '@media(max-width: 992px)': { gridTemplateColumns: '1fr', gap: '3rem' } }}>
+        <div className="about-grid">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}

@@ -33,14 +33,14 @@ const Home = () => {
       {/* Hero Section */}
       <section style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', paddingTop: '80px' }}>
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center', '@media(max-width: 992px)': { gridTemplateColumns: '1fr' } }}>
+          <div className="hero-grid">
             <div 
               style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textAlign: 'left', position: 'relative' }}
             >
               <div style={{ padding: '0.5rem 1rem', background: 'rgba(255,255,255,0.8)', border: '1px solid var(--color-border)', borderRadius: '50px', marginBottom: '2rem', fontSize: '0.9rem', color: 'var(--color-text-muted)', boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
                 ✨ Redefining Digital Aesthetics
               </div>
-              <h1 style={{ fontSize: 'clamp(3.5rem, 6vw, 5.5rem)', marginBottom: '1.5rem', lineHeight: '1.1', fontWeight: '800', letterSpacing: '-0.04em', color: 'var(--color-text)' }}>
+              <h1 className="hero-title">
                 We Create <br />
                 <span className="text-gradient-primary">
                   Visual Stories
@@ -50,7 +50,7 @@ const Home = () => {
               <p style={{ fontSize: '1.2rem', color: 'var(--color-text-muted)', marginBottom: '3.5rem', maxWidth: '550px', fontWeight: '300', lineHeight: '1.6' }}>
                 A premium creative agency specializing in cinematic videography, high-end photography, and digital marketing for brands that want to dominate.
               </p>
-              <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
+              <div className="hero-buttons">
                 <Link to="/contact" className="btn btn-primary" style={{ padding: '1.2rem 3rem', fontSize: '1.1rem' }}>Start a Project</Link>
                 <Link to="/portfolio" className="btn btn-outline" style={{ padding: '1.2rem 3rem', fontSize: '1.1rem' }}>View Showreel</Link>
               </div>
@@ -290,7 +290,7 @@ const Home = () => {
               <p style={{ fontSize: '1.2rem', color: 'var(--color-text-muted)', marginBottom: '3rem', maxWidth: '600px', margin: '0 auto 3rem', fontWeight: '300' }}>
                 Let's discuss how we can bring your vision to life through creative storytelling and strategic marketing.
               </p>
-              <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
+              <div className="hero-buttons">
                 <Link to="/contact" className="btn btn-primary" style={{ padding: '1.2rem 3rem' }}>Book a Free Call</Link>
                 <a href="https://wa.me/919709343619" target="_blank" rel="noreferrer" className="btn btn-whatsapp" style={{ padding: '1.2rem 3rem' }}>
                   <MessageCircle size={20} /> WhatsApp Us

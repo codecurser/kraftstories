@@ -26,7 +26,7 @@ const Contact = () => {
           </motion.p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.5fr', gap: '5rem', marginBottom: '8rem', '@media(max-width: 992px)': { gridTemplateColumns: '1fr' } }}>
+        <div className="contact-grid">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -83,7 +83,7 @@ const Contact = () => {
             <div className="glass-card" style={{ background: '#FFFFFF' }}>
               <h3 style={{ fontSize: '1.8rem', marginBottom: '2.5rem', fontWeight: '700' }}>Send us a Message</h3>
               <form style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }} onSubmit={(e) => e.preventDefault()}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+                <div className="contact-form-grid">
                   <div>
                     <label style={{ display: 'block', marginBottom: '0.5rem', color: 'var(--color-text-muted)', fontSize: '0.9rem', fontWeight: '500' }}>First Name</label>
                     <input type="text" placeholder="John" style={{ width: '100%', padding: '1.2rem', background: '#F8F9FA', border: '1px solid var(--color-border)', borderRadius: '12px', color: 'var(--color-text)', outline: 'none', transition: 'all 0.3s' }} onFocus={(e) => e.target.style.borderColor = 'var(--color-accent)'} onBlur={(e) => e.target.style.borderColor = 'var(--color-border)'} />
