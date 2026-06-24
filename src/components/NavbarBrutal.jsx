@@ -40,13 +40,13 @@ const Navbar = () => {
           <NavLink to="/services" className={({isActive}) => isActive ? "nav-link active" : "nav-link"}>Services</NavLink>
           <NavLink to="/portfolio" className={({isActive}) => isActive ? "nav-link active" : "nav-link"}>Portfolio</NavLink>
           <NavLink to="/pricing" className={({isActive}) => isActive ? "nav-link active" : "nav-link"}>Pricing</NavLink>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', background: 'rgba(255,255,255,0.1)', padding: '0.2rem 0.5rem', borderRadius: '20px', border: '1px solid var(--color-border)' }} onClick={toggleTheme}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', background: '#FFF', padding: '0.2rem 0.5rem', border: '2px solid #000', boxShadow: '2px 2px 0px #000' }} onClick={toggleTheme}>
             <span style={{ fontSize: '1rem', opacity: theme === 'glass' ? 1 : 0.5, filter: theme === 'glass' ? 'none' : 'grayscale(100%)' }}>✨</span>
-            <div style={{ width: '36px', height: '18px', background: 'var(--color-text-muted)', borderRadius: '10px', position: 'relative' }}>
+            <div style={{ width: '40px', height: '20px', background: '#000', position: 'relative' }}>
               <motion.div 
                 layout
                 transition={{ type: "spring", stiffness: 700, damping: 30 }}
-                style={{ width: '14px', height: '14px', background: '#FFF', borderRadius: '50%', position: 'absolute', top: '2px', left: theme === 'glass' ? '2px' : '20px' }}
+                style={{ width: '16px', height: '16px', background: 'var(--color-yellow)', border: '2px solid #000', position: 'absolute', top: '0', left: theme === 'glass' ? '0' : '20px' }}
               />
             </div>
             <span style={{ fontSize: '1rem', opacity: theme === 'brutal' ? 1 : 0.5, filter: theme === 'brutal' ? 'none' : 'grayscale(100%)' }}>😈</span>
@@ -61,7 +61,7 @@ const Navbar = () => {
         <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div 
-              className="mobile-menu glass"
+              className="mobile-menu"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}

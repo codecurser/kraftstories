@@ -31,23 +31,21 @@ const Home = () => {
   return (
     <>
       {/* Hero Section */}
-      <section style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', paddingTop: '80px' }}>
+      <section style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', paddingTop: '120px', paddingBottom: '4rem' }}>
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div className="hero-grid">
             <div 
               style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textAlign: 'left', position: 'relative' }}
             >
-              <div style={{ padding: '0.5rem 1rem', background: 'rgba(255,255,255,0.8)', border: '1px solid var(--color-border)', borderRadius: '50px', marginBottom: '2rem', fontSize: '0.9rem', color: 'var(--color-text-muted)', boxShadow: '0 4px 20px rgba(0,0,0,0.02)' }}>
-                ✨ Redefining Digital Aesthetics
-              </div>
+
               <h1 className="hero-title">
                 We Create <br />
-                <span className="text-gradient-primary">
+                <span style={{ display: 'inline-block', background: 'var(--color-pink)', color: '#FFF', padding: '0.2rem 1rem', border: '4px solid #000', boxShadow: '6px 6px 0px #000', transform: 'rotate(-2deg)', margin: '1rem 0' }}>
                   Visual Stories
                 </span>
                 <br /> That Convert.
               </h1>
-              <p style={{ fontSize: '1.2rem', color: 'var(--color-text-muted)', marginBottom: '3.5rem', maxWidth: '550px', fontWeight: '300', lineHeight: '1.6' }}>
+              <p style={{ fontSize: '1.25rem', color: '#000', marginBottom: '3.5rem', maxWidth: '550px', fontWeight: '600', lineHeight: '1.6' }}>
                 A premium creative agency specializing in cinematic videography, high-end photography, and digital marketing for brands that want to dominate.
               </p>
               <div className="hero-buttons">
@@ -62,12 +60,54 @@ const Home = () => {
             >
               {/* Stacked Images for a creative agency feel */}
               <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-                <div className="glass-card" style={{ position: 'absolute', top: '10%', right: '0%', width: '70%', height: '70%', padding: '0.5rem', zIndex: 2, transform: 'rotate(4deg)' }}>
-                  <img src="https://images.unsplash.com/photo-1600508774634-4e11d34730e2?q=80&w=2070" alt="Videography" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} />
-                </div>
-                <div className="glass-card" style={{ position: 'absolute', bottom: '10%', left: '0%', width: '65%', height: '65%', padding: '0.5rem', zIndex: 1, transform: 'rotate(-4deg)' }}>
-                  <img src="https://images.unsplash.com/photo-1542744094-3a31f272c490?q=80&w=2070" alt="Creative Strategy" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '16px' }} />
-                </div>
+                
+                {/* Draggable Card 1 */}
+                <motion.div 
+                  drag
+                  dragConstraints={{ left: -100, right: 100, top: -100, bottom: 100 }}
+                  className="brutal-card" 
+                  initial={{ rotate: -6, x: 0, y: 0 }}
+                  whileHover={{ scale: 1.05, zIndex: 10 }}
+                  whileDrag={{ scale: 1.1, zIndex: 20, rotate: 0 }}
+                  style={{ position: 'absolute', top: '5%', left: '0%', width: '240px', height: '300px', padding: '0.5rem', zIndex: 3, background: '#FFF', cursor: 'grab' }}
+                >
+                  <img src="https://images.unsplash.com/photo-1600508774634-4e11d34730e2?q=80&w=600" alt="Videography" draggable={false} style={{ width: '100%', height: '80%', objectFit: 'cover', border: '2px solid #000', pointerEvents: 'none' }} />
+                  <div style={{ padding: '0.5rem 0', fontWeight: '900', textTransform: 'uppercase', fontSize: '0.9rem', textAlign: 'center' }}>Videography</div>
+                </motion.div>
+
+                {/* Draggable Card 2 (Abstract) */}
+                <motion.div 
+                  drag
+                  dragConstraints={{ left: -100, right: 100, top: -100, bottom: 100 }}
+                  className="brutal-card" 
+                  initial={{ rotate: 8, x: 0, y: 0 }}
+                  whileHover={{ scale: 1.05, zIndex: 10 }}
+                  whileDrag={{ scale: 1.1, zIndex: 20, rotate: 0 }}
+                  style={{ position: 'absolute', bottom: '10%', right: '5%', width: '200px', height: '200px', padding: '0', zIndex: 4, background: 'var(--color-pink)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'grab' }}
+                >
+                  <motion.div 
+                    animate={{ rotate: 360 }} 
+                    transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                    style={{ width: '120px', height: '120px', border: '4px dashed #000', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--color-yellow)' }}
+                  >
+                     <span style={{ fontWeight: '900', fontSize: '1.2rem', transform: 'rotate(-10deg)' }}>DRAG ME</span>
+                  </motion.div>
+                </motion.div>
+
+                {/* Draggable Card 3 */}
+                <motion.div 
+                  drag
+                  dragConstraints={{ left: -100, right: 100, top: -100, bottom: 100 }}
+                  className="brutal-card" 
+                  initial={{ rotate: 2, x: 0, y: 0 }}
+                  whileHover={{ scale: 1.05, zIndex: 10 }}
+                  whileDrag={{ scale: 1.1, zIndex: 20, rotate: 0 }}
+                  style={{ position: 'absolute', top: '15%', right: '15%', width: '300px', height: '380px', padding: '0.5rem', zIndex: 1, background: '#FFF', cursor: 'grab' }}
+                >
+                  <img src="https://images.unsplash.com/photo-1542744094-3a31f272c490?q=80&w=800" alt="Creative Strategy" draggable={false} style={{ width: '100%', height: '85%', objectFit: 'cover', border: '2px solid #000', pointerEvents: 'none' }} />
+                  <div style={{ padding: '0.4rem 0', fontWeight: '900', textTransform: 'uppercase', fontSize: '1rem', textAlign: 'center', background: 'var(--color-blue)', color: '#FFF', marginTop: '0.5rem', border: '2px solid #000' }}>Design</div>
+                </motion.div>
+
               </div>
             </div>
           </div>
@@ -75,7 +115,7 @@ const Home = () => {
       </section>
 
       {/* Interactive Typography Reveal - Our Expertise */}
-      <section className="section" style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', overflow: 'hidden', padding: '8rem 0', background: '#050505' }}>
+      <section className="section" style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', overflow: 'hidden', padding: '8rem 0', background: 'var(--color-blue)' }}>
         
         {/* Background Image Layer */}
         <AnimatePresence>
@@ -115,8 +155,8 @@ const Home = () => {
             viewport={{ once: true }}
             style={{ marginBottom: '4rem' }}
           >
-            <h2 style={{ color: 'var(--color-accent)', fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '3px', fontWeight: 'bold' }}>Our Expertise</h2>
-            <p style={{ color: 'rgba(255,255,255,0.7)', maxWidth: '400px', marginTop: '1rem', lineHeight: '1.6' }}>Hover over our services to see what we can build for you.</p>
+            <h2 style={{ color: '#000', background: 'var(--color-yellow)', display: 'inline-block', padding: '0.5rem 1rem', border: '2px solid #000', boxShadow: '2px 2px 0px #000', fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '900' }}>Our Expertise</h2>
+            <p style={{ color: '#FFF', maxWidth: '400px', marginTop: '1rem', lineHeight: '1.6', fontWeight: '600', textShadow: '1px 1px 0px #000' }}>Hover over our services to see what we can build for you.</p>
           </motion.div>
 
           <div className="typography-list">
@@ -204,8 +244,8 @@ const Home = () => {
                     <img src={item.poster || '/poster.jpg'} alt={item.title} />
                   )}
                   {item.type === 'video' && (
-                    <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '70px', height: '70px', borderRadius: '50%', background: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(10px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2, boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}>
-                      <Play fill="var(--color-primary)" size={30} style={{ marginLeft: '4px', color: 'var(--color-primary)' }} />
+                    <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '70px', height: '70px', border: '4px solid #000', background: 'var(--color-yellow)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2, boxShadow: '6px 6px 0px #000' }}>
+                      <Play fill="#000" size={30} style={{ marginLeft: '4px', color: '#000' }} />
                     </div>
                   )}
                 </div>
@@ -223,7 +263,7 @@ const Home = () => {
       </section>
 
       {/* Testimonials */}
-      <section className="section" style={{ background: 'var(--color-accent)', padding: '6rem 0' }}>
+      <section className="section" style={{ background: 'var(--color-pink)', padding: '6rem 0', borderTop: '4px solid #000', borderBottom: '4px solid #000' }}>
         <div className="container">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
@@ -244,8 +284,8 @@ const Home = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="glass-card"
-                style={{ background: '#FFFFFF', boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}
+                className="brutal-card"
+                style={{ background: '#FFFFFF' }}
               >
                 <div style={{ display: 'flex', gap: '0.2rem', color: 'var(--color-accent)', marginBottom: '1.5rem' }}>
                   <Star fill="var(--color-accent)" size={18} />
@@ -276,8 +316,8 @@ const Home = () => {
             whileInView={{ opacity: 1, scale: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="glass-card" 
-            style={{ background: '#FFFFFF', textAlign: 'center', padding: '6rem 2rem', position: 'relative', overflow: 'hidden', boxShadow: '0 20px 50px rgba(0,0,0,0.05)' }}
+            className="brutal-card" 
+            style={{ background: 'var(--color-green)', textAlign: 'center', padding: '6rem 2rem', position: 'relative', overflow: 'hidden' }}
           >
             <motion.div 
               animate={{ backgroundPosition: ['0% 0%', '100% 100%'] }}
