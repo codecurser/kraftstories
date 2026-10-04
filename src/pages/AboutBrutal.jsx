@@ -8,10 +8,10 @@ import dhruvImg from '../assets/dhruv-sharma.jpg';
 const leaders = [
   {
     name: 'Keshav Sarraf',
-    role: 'Director & Co-Founder',
+    role: 'CEO & Co-Founder',
     image: keshavImg,
     tag: 'Leadership',
-    bio: 'Leading the creative vision, strategic growth, and high-impact media production at Kkraftstories. Focused on transforming brands through visual mastery and compelling storytelling.',
+    bio: 'Leading the executive vision, creative direction, and strategic scaling at Kkraftstories. Focused on transforming brands through visual mastery and compelling storytelling.',
     quote: 'Crafting stories that captivate, convert, and leave a lasting impression.'
   },
   {
@@ -250,7 +250,7 @@ const About = () => {
                     textTransform: 'uppercase',
                     marginBottom: '0.8rem'
                   }}>
-                    Director & Co-Founder
+                    {leader.role}
                   </div>
 
                   <h3 style={{ 

@@ -18,7 +18,7 @@ const services = [
 const leaders = [
   {
     name: 'Keshav Sarraf',
-    role: 'Director & Co-Founder',
+    role: 'CEO & Co-Founder',
     image: keshavImg,
     tag: 'Founder',
     bio: 'Leading creative vision, visual direction, and strategic storytelling at Kkraftstories.'
@@ -335,7 +335,7 @@ const Home = () => {
                     fontWeight: '700', 
                     marginBottom: '0.6rem' 
                   }}>
-                    Director & Co-Founder
+                    {leader.role}
                   </div>
 
                   <h3 style={{ 
