@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Star, MessageCircle, Play } from 'lucide-react';
+import { Star, MessageCircle, Play, ArrowRight } from 'lucide-react';
 import { portfolioItems } from './Portfolio';
+import keshavImg from '../assets/keshav-sarraf.jpg';
+import dhruvImg from '../assets/dhruv-sharma.jpg';
 
 const services = [
   { id: 1, title: 'Social Media Management', date: 'Growth', desc: 'Grow your brand presence with strategic content.', img: 'https://images.unsplash.com/photo-1616469829581-73993eb86b02?q=80&w=960' },
@@ -13,11 +15,27 @@ const services = [
   { id: 6, title: 'Editing & Post-Production', date: 'Editing', desc: 'Professional editing for reels and films.', img: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=960' },
 ];
 
-const testimonials = [
-  { id: 1, name: 'Keshavam', role: 'Founder, Ataryo', text: 'Working with Kkraftstories was an absolute game-changer for Ataryo. They perfectly understood our vision and built a platform that truly speaks to our audience. Highly recommended!' },
-  { id: 2, name: 'Dr. Mohit Mathur', role: 'Professional Doctor', text: 'As a medical professional, maintaining trust online is crucial. They delivered a clean, fast, and professional website that has significantly improved how patients interact with my practice.' }
+const leaders = [
+  {
+    name: 'Keshav Sarraf',
+    role: 'Director & Co-Founder',
+    image: keshavImg,
+    tag: 'Co-Founder',
+    bio: 'Leading creative vision, visual direction, and strategic storytelling at Kkraftstories.'
+  },
+  {
+    name: 'Dhruv Sharma',
+    role: 'Director & Co-Founder',
+    image: dhruvImg,
+    tag: 'Co-Founder',
+    bio: 'Driving brand growth, executive partnerships, and high-impact digital solutions.'
+  }
 ];
 
+const testimonials = [
+  { id: 1, name: 'Aarav Singhania', role: 'Founder, Ataryo', text: 'Working with Kkraftstories was an absolute game-changer for Ataryo. They perfectly understood our vision and built a platform that truly speaks to our audience. Highly recommended!' },
+  { id: 2, name: 'Dr. Mohit Mathur', role: 'Professional Doctor', text: 'As a medical professional, maintaining trust online is crucial. They delivered a clean, fast, and professional website that has significantly improved how patients interact with my practice.' }
+];
 
 const Home = () => {
   const [activeServiceId, setActiveServiceId] = useState(services[0].id);
@@ -25,7 +43,6 @@ const Home = () => {
   
   const servicesParallax = useTransform(scrollY, [200, 1000], [50, -50]);
   const portfolioParallax = useTransform(scrollY, [600, 1500], [80, -80]);
-  const imgParallax = useTransform(scrollY, [800, 2000], ["-15%", "15%"]);
   const testimonialParallax = useTransform(scrollY, [1200, 2200], [50, -50]);
   
   return (
@@ -37,7 +54,6 @@ const Home = () => {
             <div 
               style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textAlign: 'left', position: 'relative' }}
             >
-
               <h1 className="hero-title">
                 We Create <br />
                 <span style={{ display: 'inline-block', background: 'var(--color-pink)', color: '#FFF', padding: '0.2rem 1rem', border: '4px solid #000', boxShadow: '6px 6px 0px #000', transform: 'rotate(-2deg)', margin: '1rem 0' }}>
@@ -201,7 +217,7 @@ const Home = () => {
               <h2 className="section-title" style={{ marginBottom: '0.5rem' }}>Featured <span className="text-gradient-accent">Work</span></h2>
               <p className="section-subtitle" style={{ margin: 0, textAlign: 'left' }}>Glimpses of our creative brilliance.</p>
             </div>
-            <Link to="/portfolio" className="btn btn-outline" style={{ display: 'none', '@media(min-width: 768px)': { display: 'flex' } }}>View All Projects</Link>
+            <Link to="/portfolio" className="btn btn-outline hide-on-mobile">View All Projects</Link>
           </motion.div>
 
           <motion.div className="creationsBlocUl" style={{ gap: '2.5rem', y: portfolioParallax }}>
@@ -262,8 +278,152 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Leadership Spotlight Section - Keshav Sarraf & Dhruv Sharma */}
+      <section className="section" style={{ background: '#FFF', borderTop: '4px solid #000', borderBottom: '4px solid #000', padding: '6rem 0' }}>
+        <div className="container">
+          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <span style={{ 
+                background: 'var(--color-pink)', 
+                color: '#FFF', 
+                padding: '0.4rem 1.2rem', 
+                border: '3px solid #000', 
+                boxShadow: '3px 3px 0px #000',
+                fontWeight: '900', 
+                textTransform: 'uppercase', 
+                fontSize: '0.9rem',
+                letterSpacing: '1px',
+                display: 'inline-block',
+                marginBottom: '1rem'
+              }}>
+                Leadership Spotlight
+              </span>
+              <h2 className="section-title" style={{ fontSize: '2.8rem' }}>
+                The Vision Behind <span className="text-gradient-primary">Kkraftstories</span>
+              </h2>
+              <p className="section-subtitle" style={{ maxWidth: '650px', margin: '0 auto' }}>
+                Guided by visionary directors dedicated to elevating brands with high-impact visual storytelling.
+              </p>
+            </motion.div>
+          </div>
+
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', 
+            gap: '2.5rem',
+            marginBottom: '3rem'
+          }}>
+            {leaders.map((leader, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.15 }}
+                className="brutal-card"
+                style={{ 
+                  background: index === 0 ? 'var(--color-yellow)' : 'var(--color-bg)', 
+                  padding: '2.5rem 2rem',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  textAlign: 'center'
+                }}
+              >
+                <div style={{
+                  position: 'relative',
+                  width: '100%',
+                  maxWidth: '280px',
+                  background: '#FFF',
+                  border: '4px solid #000',
+                  boxShadow: '6px 6px 0px #000',
+                  padding: '0.5rem',
+                  marginBottom: '1.5rem',
+                  transform: index === 0 ? 'rotate(-1.5deg)' : 'rotate(1.5deg)'
+                }}>
+                  <div style={{ 
+                    width: '100%', 
+                    height: '320px', 
+                    overflow: 'hidden', 
+                    border: '2px solid #000',
+                    background: '#F0F0F0'
+                  }}>
+                    <img 
+                      src={leader.image} 
+                      alt={`${leader.name} - ${leader.role}`} 
+                      style={{ 
+                        width: '100%', 
+                        height: '100%', 
+                        objectFit: 'cover',
+                        objectPosition: 'center top'
+                      }} 
+                    />
+                  </div>
+                </div>
+
+                <div style={{ width: '100%' }}>
+                  <div style={{ 
+                    display: 'inline-block', 
+                    background: '#000', 
+                    color: '#FFF', 
+                    padding: '0.2rem 0.8rem', 
+                    fontSize: '0.75rem', 
+                    fontWeight: '900', 
+                    textTransform: 'uppercase',
+                    marginBottom: '0.6rem'
+                  }}>
+                    Director & Co-Founder
+                  </div>
+
+                  <h3 style={{ 
+                    fontSize: '2rem', 
+                    fontWeight: '900', 
+                    marginBottom: '0.2rem', 
+                    textTransform: 'uppercase', 
+                    letterSpacing: '-0.02em',
+                    color: '#000'
+                  }}>
+                    {leader.name}
+                  </h3>
+
+                  <h4 style={{ 
+                    fontSize: '1rem', 
+                    fontWeight: '800', 
+                    color: 'var(--color-accent)', 
+                    marginBottom: '1rem', 
+                    textTransform: 'uppercase'
+                  }}>
+                    {leader.role}
+                  </h4>
+
+                  <p style={{ 
+                    fontSize: '1rem', 
+                    lineHeight: '1.6', 
+                    fontWeight: '600', 
+                    color: '#111', 
+                    margin: 0
+                  }}>
+                    {leader.bio}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <div style={{ textAlign: 'center' }}>
+            <Link to="/about" className="btn btn-primary" style={{ padding: '1rem 2.5rem', fontSize: '1rem' }}>
+              Meet The Full Team <ArrowRight size={18} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials */}
-      <section className="section" style={{ background: 'var(--color-pink)', padding: '6rem 0', borderTop: '4px solid #000', borderBottom: '4px solid #000' }}>
+      <section className="section" style={{ background: 'var(--color-pink)', padding: '6rem 0', borderBottom: '4px solid #000' }}>
         <div className="container">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
@@ -340,8 +500,6 @@ const Home = () => {
           </motion.div>
         </div>
       </section>
-
-
     </>
   );
 };

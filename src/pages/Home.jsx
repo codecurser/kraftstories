@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Star, MessageCircle, Play } from 'lucide-react';
+import { Star, MessageCircle, Play, ArrowRight } from 'lucide-react';
 import { portfolioItems } from './Portfolio';
+import keshavImg from '../assets/keshav-sarraf.jpg';
+import dhruvImg from '../assets/dhruv-sharma.jpg';
 
 const services = [
   { id: 1, title: 'Social Media Management', date: 'Growth', desc: 'Grow your brand presence with strategic content.', img: 'https://images.unsplash.com/photo-1616469829581-73993eb86b02?q=80&w=960' },
@@ -13,11 +15,27 @@ const services = [
   { id: 6, title: 'Editing & Post-Production', date: 'Editing', desc: 'Professional editing for reels and films.', img: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=960' },
 ];
 
-const testimonials = [
-  { id: 1, name: 'Keshavam', role: 'Founder, Ataryo', text: 'Working with Kkraftstories was an absolute game-changer for Ataryo. They perfectly understood our vision and built a platform that truly speaks to our audience. Highly recommended!' },
-  { id: 2, name: 'Dr. Mohit Mathur', role: 'Professional Doctor', text: 'As a medical professional, maintaining trust online is crucial. They delivered a clean, fast, and professional website that has significantly improved how patients interact with my practice.' }
+const leaders = [
+  {
+    name: 'Keshav Sarraf',
+    role: 'Director & Co-Founder',
+    image: keshavImg,
+    tag: 'Founder',
+    bio: 'Leading creative vision, visual direction, and strategic storytelling at Kkraftstories.'
+  },
+  {
+    name: 'Dhruv Sharma',
+    role: 'Director & Co-Founder',
+    image: dhruvImg,
+    tag: 'Founder',
+    bio: 'Driving brand growth, executive partnerships, and high-impact digital solutions.'
+  }
 ];
 
+const testimonials = [
+  { id: 1, name: 'Aarav Singhania', role: 'Founder, Ataryo', text: 'Working with Kkraftstories was an absolute game-changer for Ataryo. They perfectly understood our vision and built a platform that truly speaks to our audience. Highly recommended!' },
+  { id: 2, name: 'Dr. Mohit Mathur', role: 'Professional Doctor', text: 'As a medical professional, maintaining trust online is crucial. They delivered a clean, fast, and professional website that has significantly improved how patients interact with my practice.' }
+];
 
 const Home = () => {
   const [activeServiceId, setActiveServiceId] = useState(services[0].id);
@@ -25,7 +43,6 @@ const Home = () => {
   
   const servicesParallax = useTransform(scrollY, [200, 1000], [50, -50]);
   const portfolioParallax = useTransform(scrollY, [600, 1500], [80, -80]);
-  const imgParallax = useTransform(scrollY, [800, 2000], ["-15%", "15%"]);
   const testimonialParallax = useTransform(scrollY, [1200, 2200], [50, -50]);
   
   return (
@@ -115,8 +132,8 @@ const Home = () => {
             viewport={{ once: true }}
             style={{ marginBottom: '4rem' }}
           >
-            <h2 style={{ color: 'var(--color-accent)', fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '3px', fontWeight: 'bold' }}>Our Expertise</h2>
-            <p style={{ color: 'rgba(255,255,255,0.7)', maxWidth: '400px', marginTop: '1rem', lineHeight: '1.6' }}>Hover over our services to see what we can build for you.</p>
+            <h2 className="section-title" style={{ color: '#FFF' }}>Our <span className="text-gradient-primary">Expertise</span></h2>
+            <p className="section-subtitle" style={{ color: 'rgba(255,255,255,0.6)', margin: 0, textAlign: 'left' }}>Hover over our services to see what we can build for you.</p>
           </motion.div>
 
           <div className="typography-list">
@@ -161,7 +178,7 @@ const Home = () => {
               <h2 className="section-title" style={{ marginBottom: '0.5rem' }}>Featured <span className="text-gradient-accent">Work</span></h2>
               <p className="section-subtitle" style={{ margin: 0, textAlign: 'left' }}>Glimpses of our creative brilliance.</p>
             </div>
-            <Link to="/portfolio" className="btn btn-outline" style={{ display: 'none', '@media(min-width: 768px)': { display: 'flex' } }}>View All Projects</Link>
+            <Link to="/portfolio" className="btn btn-outline hide-on-mobile">View All Projects</Link>
           </motion.div>
 
           <motion.div className="creationsBlocUl" style={{ gap: '2.5rem', y: portfolioParallax }}>
@@ -204,8 +221,8 @@ const Home = () => {
                     <img src={item.poster || '/poster.jpg'} alt={item.title} />
                   )}
                   {item.type === 'video' && (
-                    <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '70px', height: '70px', borderRadius: '50%', background: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(10px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2, boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}>
-                      <Play fill="var(--color-primary)" size={30} style={{ marginLeft: '4px', color: 'var(--color-primary)' }} />
+                    <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '60px', height: '60px', borderRadius: '50%', background: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(10px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2, boxShadow: '0 10px 30px rgba(0,0,0,0.3)' }}>
+                      <Play fill="#000" size={24} style={{ marginLeft: '4px' }} />
                     </div>
                   )}
                 </div>
@@ -222,8 +239,148 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Leadership Spotlight Section - Keshav Sarraf & Dhruv Sharma */}
+      <section className="section" style={{ background: '#FFFFFF', padding: '6rem 0' }}>
+        <div className="container">
+          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <span style={{ 
+                background: 'rgba(37, 99, 235, 0.1)', 
+                color: 'var(--color-accent)', 
+                padding: '0.4rem 1.2rem', 
+                borderRadius: '50px',
+                fontWeight: '600', 
+                fontSize: '0.85rem',
+                letterSpacing: '1px',
+                display: 'inline-block',
+                marginBottom: '1rem'
+              }}>
+                LEADERSHIP SPOTLIGHT
+              </span>
+              <h2 className="section-title" style={{ fontSize: '2.6rem' }}>
+                The Vision Behind <span className="text-gradient-primary">Kkraftstories</span>
+              </h2>
+              <p className="section-subtitle" style={{ maxWidth: '650px', margin: '0 auto' }}>
+                Guided by visionary directors dedicated to elevating brands with high-impact visual storytelling.
+              </p>
+            </motion.div>
+          </div>
+
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', 
+            gap: '2.5rem',
+            marginBottom: '3rem'
+          }}>
+            {leaders.map((leader, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.15 }}
+                className="glass-card"
+                style={{ 
+                  padding: '2.5rem 2rem', 
+                  borderRadius: '28px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  textAlign: 'center'
+                }}
+              >
+                <div style={{
+                  position: 'relative',
+                  width: '100%',
+                  maxWidth: '280px',
+                  background: 'rgba(255, 255, 255, 0.8)',
+                  borderRadius: '22px',
+                  padding: '0.75rem',
+                  boxShadow: '0 15px 35px rgba(0,0,0,0.06)',
+                  border: '1px solid rgba(255, 255, 255, 0.9)',
+                  marginBottom: '1.5rem'
+                }}>
+                  <div style={{ 
+                    width: '100%', 
+                    height: '320px', 
+                    overflow: 'hidden', 
+                    borderRadius: '16px',
+                    background: '#F3F4F6'
+                  }}>
+                    <img 
+                      src={leader.image} 
+                      alt={`${leader.name} - ${leader.role}`} 
+                      style={{ 
+                        width: '100%', 
+                        height: '100%', 
+                        objectFit: 'cover',
+                        objectPosition: 'center top'
+                      }} 
+                    />
+                  </div>
+                </div>
+
+                <div style={{ width: '100%' }}>
+                  <div style={{ 
+                    display: 'inline-block', 
+                    background: 'rgba(37, 99, 235, 0.1)', 
+                    color: 'var(--color-accent)', 
+                    padding: '0.3rem 0.9rem', 
+                    borderRadius: '50px',
+                    fontSize: '0.75rem', 
+                    fontWeight: '700', 
+                    marginBottom: '0.6rem' 
+                  }}>
+                    Director & Co-Founder
+                  </div>
+
+                  <h3 style={{ 
+                    fontSize: '1.9rem', 
+                    fontWeight: '800', 
+                    marginBottom: '0.2rem', 
+                    letterSpacing: '-0.02em',
+                    color: 'var(--color-text)'
+                  }}>
+                    {leader.name}
+                  </h3>
+
+                  <h4 style={{ 
+                    fontSize: '0.95rem', 
+                    fontWeight: '600', 
+                    color: 'var(--color-accent)', 
+                    marginBottom: '1rem' 
+                  }}>
+                    {leader.role}
+                  </h4>
+
+                  <p style={{ 
+                    fontSize: '1rem', 
+                    lineHeight: '1.6', 
+                    fontWeight: '300', 
+                    color: 'var(--color-text-muted)', 
+                    margin: 0
+                  }}>
+                    {leader.bio}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <div style={{ textAlign: 'center' }}>
+            <Link to="/about" className="btn btn-primary" style={{ padding: '1rem 2.5rem', fontSize: '1rem' }}>
+              Meet The Full Team <ArrowRight size={18} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials */}
-      <section className="section" style={{ background: 'var(--color-accent)', padding: '6rem 0' }}>
+      <section className="section" style={{ background: 'rgba(255, 255, 255, 0.5)' }}>
         <div className="container">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
@@ -232,8 +389,8 @@ const Home = () => {
             transition={{ duration: 0.6 }}
             className="section-header"
           >
-            <h2 className="section-title" style={{ color: '#FFFFFF' }}>Client Love</h2>
-            <p className="section-subtitle" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>Don't just take our word for it.</p>
+            <h2 className="section-title">Client <span className="text-gradient-primary">Love</span></h2>
+            <p className="section-subtitle">Don't just take our word for it.</p>
           </motion.div>
 
           <motion.div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', y: testimonialParallax }}>
@@ -300,8 +457,6 @@ const Home = () => {
           </motion.div>
         </div>
       </section>
-
-
     </>
   );
 };
